@@ -73,7 +73,11 @@
                                             <p class="product-price">u$s {{price}}</p>
                                             <div class="product-short-description">
                                                 {{description}}
-                                                <p>{{product.images}}</p>
+                                                <!-- ESTO FUNCIONA, para el futuro tal vez
+                                                {{#each product.images}}
+                                                    <img src={{this}} alt="">
+                                                {{/each}}
+                                                -->
                                                 <!-- <ul>
                                                     <li> i7 </li>
                                                     <li> 11gen </li>
