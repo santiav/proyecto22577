@@ -4,7 +4,7 @@ const hbs = require('hbs');
 const path = require('path');
 const rutasFront = require('./routes/front.js')
 const rutasBack = require('./routes/back.js')
-
+require('./views/helpers/helpers.js')
 const port = 3000
 
 app.set('view engine', 'hbs');
