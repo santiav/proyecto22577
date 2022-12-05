@@ -10,14 +10,14 @@ const {indexGET,
 } = require('../controllers/front.js')
 
 // FRONT
-router.get('/', )
+router.get('/', indexGET)
 
-router.get('/como-comprar',)
+router.get('/como-comprar',comoComprarGET)
 
-router.get('/contacto', )
+router.get('/contacto', contactoGET)
 
-router.get('/producto-detalle',)
+router.get('/producto-detalle',productoDetalleGET)
 
-router.get('/sobre-nosotros', )
+router.get('/sobre-nosotros', sobreNosotrosGET)
 
 module.exports = router
