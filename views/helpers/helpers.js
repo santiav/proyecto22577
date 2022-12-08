@@ -14,7 +14,22 @@ axios.get("https://www.dolarsi.com/api/api.php?type=valoresprincipales")
     .catch(err => {console.log(err)})
 
 
+// Helpers
 hbs.registerHelper('dolarApeso', precio => {
     const total = dolar * precio
     return new Intl.NumberFormat('es-AR',{style: 'currency', currency: 'ARS'}).format(total)
 });
+
+hbs.registerHelper('listado', datos => {
+    // i5, 8gb ram, 
+    let array = datos.split(',')
+    
+    let html = "<ul>"
+
+    for (item of array) {
+        html += `<li>${item}</li>`
+    }
+
+    return `${html}</ul>`
+
+})
