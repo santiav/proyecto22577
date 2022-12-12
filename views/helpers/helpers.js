@@ -21,15 +21,30 @@ hbs.registerHelper('dolarApeso', precio => {
 });
 
 hbs.registerHelper('listado', datos => {
-    // i5, 8gb ram, 
+    // intel i5, 8gb ram, 
     let array = datos.split(',')
+    // [ 'intel i5', '8gb ram' ]
     
     let html = "<ul>"
-
+    /* 
+        <ul>
+            <li>intel i5</li>
+            <li>8gb ram</li>
+    */
     for (item of array) {
         html += `<li>${item}</li>`
     }
 
     return `${html}</ul>`
 
+})
+
+// Destacado = 1 o 0
+// <input type="checkbox" name="destacado" value="{{destacado}}" disabled> 
+
+hbs.registerHelper("check", valor => {
+    if (valor == "1") {
+        return `<input type="checkbox" name="destacado" value="1" disabled checked>`
+    }
+    return `<input type="checkbox" name="destacado" value="0" disabled>`
 })
