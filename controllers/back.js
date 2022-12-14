@@ -19,8 +19,24 @@ const adminGET =  (req, res) => {
 const agregarProductoGET = (req, res) => {
 	console.log("estas en agregar")
 	res.render('agregar-producto', {
-
+		titulo: "Agregar producto"
 	})
+}
+
+const agregarProductoPOST = (req, res) => {
+
+	const info = req.body
+	const sql = "INSERT INTO productos SET ?"
+	db.query(sql, info, (err, data) => {
+		if (err) throw err
+		console.log("Producto agregado")
+		res.render("agregar-producto", { 
+			mensaje: "Producto agregado",
+			titulo: "Agregar producto"
+		})
+	})
+
+
 }
 
 const editarGET = (req, res) => {
@@ -40,6 +56,7 @@ const loginGET =  (req, res) => {
 module.exports = {
     adminGET,
     agregarProductoGET,
+	agregarProductoPOST,
     editarGET,
     loginGET
 }
