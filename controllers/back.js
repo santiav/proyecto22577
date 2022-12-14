@@ -81,6 +81,19 @@ const editarProductoPOST = (req, res) => {
 	})
 }
 
+const borrarProductoGET = (req, res) => {
+	// /borrar/1
+	const id = req.params.id
+
+	const sql = "DELETE FROM productos WHERE id = ?"
+	db.query(sql, id, (err, data) => {
+		if (err) throw err
+		console.log(data.affectedRows + " registro borrado");
+		res.redirect('/admin');
+	})
+
+}
+
 const loginGET =  (req, res) => {
 	console.log("estas en login")
 	res.render('login', {
@@ -94,5 +107,6 @@ module.exports = {
 	agregarProductoPOST,
     editarProductoGET,
 	editarProductoPOST,
+	borrarProductoGET,
     loginGET
 }
