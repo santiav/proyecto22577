@@ -39,10 +39,45 @@ const agregarProductoPOST = (req, res) => {
 
 }
 
-const editarGET = (req, res) => {
-	console.log("estas en editar")
-	res.render('editar-producto', {
+const editarProductoGET = (req, res) => {
+	
+	// /editar/1
+	const id = req.params.id
 
+	const sql = "SELECT * FROM productos WHERE id = ?"
+
+	db.query(sql, id, (err, data) => {
+		if (err) throw err
+		console.log(data[0])
+		if (data.length > 0) {
+			res.render('editar-producto', {
+				titulo: "Editar producto",
+				producto: data[0]
+			})
+		} else {
+			res.send(`
+				<h1>no existe producto con id ${id}</h1>
+				<a href="/admin/">Ver listado de productos</a>
+			`)
+		}
+	})
+
+	
+}
+
+const editarProductoPOST = (req, res) => {
+
+	// /editar/1
+	const id = req.params.id
+	const producto = req.body
+
+	const sql = "UPDATE productos SET ? WHERE id = ?"
+
+	db.query(sql, [producto, id], (err, data) => {
+		if (err) throw err
+		console.log("ACTUALIZAR DATA", data)
+		console.log(`${data.affectedRows} registro actualizado`);
+		res.redirect('/admin');
 	})
 }
 
@@ -57,6 +92,7 @@ module.exports = {
     adminGET,
     agregarProductoGET,
 	agregarProductoPOST,
-    editarGET,
+    editarProductoGET,
+	editarProductoPOST,
     loginGET
 }

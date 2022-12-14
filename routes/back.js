@@ -4,7 +4,8 @@ const {
     adminGET,
     agregarProductoGET,
     agregarProductoPOST,
-    editarGET,
+    editarProductoGET,
+    editarProductoPOST,
     loginGET
 } = require('../controllers/back.js')
 
@@ -14,7 +15,8 @@ router.get('/admin', adminGET)
 router.get('/agregar-producto', agregarProductoGET)
 router.post('/agregar-producto', agregarProductoPOST)
 
-router.get('/editar-producto', editarGET )
+router.get('/editar-producto/:id', editarProductoGET )
+router.post('/editar-producto/:id', editarProductoPOST )
 
 router.get('/login', loginGET)
 
