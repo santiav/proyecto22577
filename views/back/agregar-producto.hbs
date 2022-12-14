@@ -16,31 +16,31 @@
             {{/if}}
             <form action="/agregar-producto" method="post">
                 <div class="row">
-                    <div class=" col-md-6 col-lg-4">
+                    <div class="col-md-6 col-xl-5">
                         <div class="row">
                             <div class="mb-3  col-md-5">
-                                <label for="nombre" class="form-label">Nombre</label>
+                                <label for="nombre" class="form-label small">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" placeholder="Nombre del producto"
                                     name="nombre" required>
                             </div>
 
 
                             <div class="mb-3 col-md-3">
-                                <label for="precio" class="form-label">Precio (u$s)</label>
+                                <label for="precio" class="form-label small">Precio (u$s)</label>
                                 <input type="text" class="form-control" id="precio" placeholder="$ Precio en dólares"
                                     name="precio" required>
                             </div>
 
                             <div class="mb-3 col-md-3">
-                                <label for="stock" class="form-label">Stock</label>
+                                <label for="stock" class="form-label small">Stock</label>
                                 <input type="number" class="form-control" id="stock" 
                                     name="stock" required>
                             </div>
 
                             <div class="mb-3 col-md-1">
-                                <label for="destacado" class="form-label">D</label>
-                                <input type="text" class="form-control" id="destacado" 
-                                    name="destacado" required>
+                                <label for="destacado" class="form-label small">Destacado</label>
+                                <input type="checkbox" class="form-check-input" id="destacado" name="destacado" value="1">
+                               
                             </div>
                         </div>
 
@@ -55,23 +55,23 @@
                         </div> -->
 
                         <div class="col-12" id="">
-                            <label for="rutaImagen" class="form-label">URL imagen</label>
-                            <input class="form-control" type="text" id="rutaImagen" name="rutaImagen" required>
+                            <label for="rutaImagen" class="form-label small">URL imagen</label>
+                            <input class="form-control" type="text" id="rutaImagen" name="rutaImagen" placeholder="http://" required>
                         </div>
 
 
 
 
                     </div>
-                    <div class="col-12 col-md-6 col-lg-8">
+                    <div class="col-md-6 col-xl-7">
                         <div class="row">
                             <div class="mb-3 col-8">
-                                <label for="descripcion" class="form-label">Descripcion</label>
+                                <label for="descripcion" class="form-label small">Descripcion</label>
                                 <textarea class="form-control" id="descripcion" rows="6"
                                     placeholder="Descripcion del producto" name="descripcion"></textarea>
                             </div>
                             <div class="mb-3 col-4">
-                                <label for="caracteristicas" class="form-label">Caracteristicas</label>
+                                <label for="caracteristicas" class="form-label small">Caracteristicas</label>
                                 <textarea class="form-control" id="caracteristicas" rows="6"
                                     placeholder="Separar con coma las características"
                                     name="caracteristicas"></textarea>
