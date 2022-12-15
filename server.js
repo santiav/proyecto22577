@@ -3,9 +3,20 @@ const app = express()
 const hbs = require('hbs');
 const path = require('path');
 const rutasFront = require('./routes/front.js')
+const session = require('express-session')
 const rutasBack = require('./routes/back.js')
 require('./views/helpers/helpers.js')
 const port = 3000
+
+
+// Sesiones mediante cookies
+app.use(session({
+    secret: "sarasa",
+    resave: true,
+    saveUninitialized: false,
+    cookie: {maxAge: 300000} // 5 minutos
+
+}))
 
 // middlewares para tomar los datos del formulario
 app.use(express.json());

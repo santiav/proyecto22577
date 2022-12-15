@@ -2,17 +2,26 @@
 require('dotenv').config()
 const db = require('../models/connection.js')
 
-const adminGET =  (req, res) => {
+const adminGET = (req, res) => {
 
-	let sql = "SELECT * FROM productos"
-	db.query(sql, (err, data) => {
-		if (err) throw err
-		// console.log(data)
-		res.render('admin', {
-			titulo: "Panel de control",
-			productos: data
+	const logueado = req.session.logueado // true | null
+
+	if (logueado) {
+		let sql = "SELECT * FROM productos"
+		db.query(sql, (err, data) => {
+			if (err) throw err
+			// console.log(data)
+			res.render('admin', {
+				titulo: "Panel de control",
+				logueado: logueado, // true
+				usuario: req.session.nombreUsuario,
+				productos: data
+			})
 		})
-	})
+	} else {
+		res.redirect('/login')
+	}
+
 
 }
 
@@ -30,7 +39,7 @@ const agregarProductoPOST = (req, res) => {
 	db.query(sql, info, (err, data) => {
 		if (err) throw err
 		console.log("Producto agregado")
-		res.render("agregar-producto", { 
+		res.render("agregar-producto", {
 			mensaje: "Producto agregado",
 			titulo: "Agregar producto"
 		})
@@ -40,7 +49,7 @@ const agregarProductoPOST = (req, res) => {
 }
 
 const editarProductoGET = (req, res) => {
-	
+
 	// /editar/1
 	const id = req.params.id
 
@@ -62,7 +71,7 @@ const editarProductoGET = (req, res) => {
 		}
 	})
 
-	
+
 }
 
 const editarProductoPOST = (req, res) => {
@@ -94,19 +103,47 @@ const borrarProductoGET = (req, res) => {
 
 }
 
-const loginGET =  (req, res) => {
+const loginGET = (req, res) => {
 	console.log("estas en login")
 	res.render('login', {
 
 	})
 }
 
+const loginPOST = (req, res) => {
+
+	const usuario = req.body.usuario
+	const clave = req.body.clave
+
+	if (usuario && clave) {
+		const sql = "SELECT * FROM cuentas WHERE usuario = ? AND clave = ?"
+		db.query(sql, [usuario, clave], (err, data) => {
+			if (data.length > 0) {
+				req.session.logueado = true // Creamos una propiedad llamada "logueado" para que el objeto session almacene el valor "TRUE" y es para usarlo en el parcial de "header"
+				req.session.nombreUsuario = usuario
+				res.redirect('/admin');
+			} else {
+				res.render('login', {
+					titulo: "Login",
+					error: "Nombre de usuario o clave incorrecto(s)"
+				})
+			}
+		})
+	} else {
+		res.render("login", {
+			titulo: "Login",
+			error: "Por favor escribe un nombre de usuario y clave"
+		})
+	}
+}
+
 module.exports = {
-    adminGET,
-    agregarProductoGET,
+	adminGET,
+	agregarProductoGET,
 	agregarProductoPOST,
-    editarProductoGET,
+	editarProductoGET,
 	editarProductoPOST,
 	borrarProductoGET,
-    loginGET
+	loginPOST,
+	loginGET
 }
