@@ -17,6 +17,7 @@ axios.get("https://www.dolarsi.com/api/api.php?type=valoresprincipales")
 // Helpers
 hbs.registerHelper('dolarApeso', precio => {
     const total = dolar * precio
+    console.log(total)
     return new Intl.NumberFormat('es-AR',{style: 'currency', currency: 'ARS'}).format(total)
 });
 
@@ -48,3 +49,4 @@ hbs.registerHelper("check", valor => {
     }
     return `<input type="checkbox" name="destacado" value="0" disabled>`
 })
+
